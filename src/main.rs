@@ -2,7 +2,7 @@ use std::process::Stdio;
 use tokio::process::Command;
 use tokio::io::AsyncWriteExt;
 use tokio::time::timeout;
-use futures::future::{select_all, join_all};
+use futures::future::{select_all};
 use std::future::Future;
 use std::pin::Pin;
 use std::task::{Context, Poll};
@@ -68,69 +68,91 @@ async fn search_heuristic(filename: String,
                           lookout: f32) -> Option<NuxmvOutput> {
     let mut tasks = Vec::new();
 
+    let max_time = std::time::Duration::from_millis(2000);
+
     // steps 1..cutoff, normal incremental solver
     let command = format!(
-        //"go_bmc\ncheck_ltlspec_bmc_inc -k {}\nshow_traces -v\nquit\n",
-        "go_bmc\ncheck_ltlspec_bmc_inc -k {}\nquit\n",
+        "go_bmc\ncheck_ltlspec_bmc_inc -k {}\nshow_traces -v\nquit\n",
         cutoff
     );
     let fut = Box::pin(call_nuxmv(filename.clone(), command, cutoff));
-    tasks.push(WrappedWorkTask::from(cutoff, fut));
+    tasks.push(timeout(max_time, WrappedWorkTask::from(cutoff, fut)));
 
     // solve one instance at a time concurrently for bounds above the cutoff
     for i in (cutoff+1)..max_steps {
         let command = format!(
-            //"go_bmc\ncheck_ltlspec_bmc_onepb -k {}\nshow_traces -v\nquit\n",
-            "go_bmc\ncheck_ltlspec_bmc_onepb -k {}\nquit\n",
+            "go_bmc\ncheck_ltlspec_bmc_onepb -k {}\nshow_traces -v\nquit\n",
             i
         );
         let fut = Box::pin(call_nuxmv(filename.clone(), command, i));
-        tasks.push(WrappedWorkTask::from(i, fut));
+        tasks.push(timeout(max_time, WrappedWorkTask::from(i, fut)));
     }
 
     let now = std::time::Instant::now();
     let mut one = select_all(tasks);
     loop {
-        let (x, _, remaining) = one.await;
+        let (x, _, mut remaining) = one.await;
 
-        let (c,r,_e) = x.unwrap();
-        if !r.contains("no counterexample found with bound") {
+        let (c,r,e) = match x {
+            Result::Ok(Result::Ok((c,r,e))) => (c,r,e),
+            _ => {
+                if remaining.is_empty() {
+                    return None;
+                }
+                one = select_all(remaining);
+                continue;
+            }
+        };
+
+        if !r.contains("Trace Type: Counterexample") {
+            println!("no plan found for bound {} after {}ms", c, now.elapsed().as_millis());
+            remaining.retain(|f| f.get_ref().max_steps > c); // stop looking for shorter plans
+            if remaining.is_empty() {
+                return None;
+            }
+            one = select_all(remaining);
+        } else {
             println!("first guess found after after {}ms (with plan length: {})",
                      now.elapsed().as_millis(), c);
 
             let dur = now.elapsed().mul_f32(lookout);
             println!("setting timeout to {}", dur.as_millis());
-            let new_futs: Vec<_> = remaining
+            let remaining: Vec<_> = remaining
                 .into_iter()
-                .filter(|f| f.max_steps < c) // stop looking for longer plans
-                // .map(|r| {println!("waiting for {} still", r.max_steps); r})
+                .filter(|f| f.get_ref().max_steps < c) // stop looking for longer plans
                 .map(|r| timeout(dur, r)).collect();
-            let results = join_all(new_futs).await;
 
-            let x = results
-                .into_iter()
-                .filter_map(Result::ok) // throw away timeouts
-                .filter_map(Result::ok) // throw away inner IO errors
-                .filter(|(_,r,_)|
-                        !r.contains("no counterexample found with bound"))
-                .min_by(|x,y| x.0.cmp(&y.0)); // keep only solution with lowest bound
+            if remaining.is_empty() {
+                // no more tasks to run!
+                return Some((c,r,e))
+            }
 
-            return x;
+            let mut solutions = vec![(c,r,e)];
+            let mut one = select_all(remaining);
+            loop {
+                let (x, _, mut remaining) = one.await;
+                match x {
+                    // outer timeout, io error, inner (global) timeout
+                    Result::Ok(Result::Ok(Result::Ok((c,r,e)))) => {
+                        if r.contains("Trace Type: Counterexample") {
+                            // save solution
+                            solutions.push((c,r,e));
+                            // stop looking for longer plans
+                            remaining.retain(|f| f.get_ref().get_ref().max_steps < c);
+                        } else {
+                            // stop looking for shorter plans
+                            remaining.retain(|f| f.get_ref().get_ref().max_steps > c);
+                        }
+                    }
+                    _ => {}
+                }
+                if remaining.is_empty() {
+                    break;
+                }
+                one = select_all(remaining);
+            }
+            return solutions.into_iter().min_by(|x,y| x.0.cmp(&y.0));
         }
-
-        println!("no plan found for bound {} after {}ms", c, now.elapsed().as_millis());
-
-        let remaining: Vec<_> = remaining
-            .into_iter()
-            .filter(|f| f.max_steps > c) // stop looking for shorter plans
-            // .map(|r| {println!("waiting for {} still", r.max_steps); r})
-            .collect();
-
-        if remaining.is_empty() {
-            // no soultion found
-            return None;
-        }
-        one = select_all(remaining);
     }
 }
 
@@ -149,6 +171,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut runtime = tokio::runtime::Runtime::new().unwrap();
 
     let filename: &str = "big_op_model.bmc";
+    //let filename: &str = "small_problem.bmc";
 
     // first run plain old incremental to find answer
     println!("start classic incremental");
@@ -165,15 +188,16 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("start concurrent heuristic");
     let now = std::time::Instant::now();
     let result = runtime.block_on(search_heuristic(filename.to_owned(), 15, 40, 1.5));
-
     let heuristic_time = now.elapsed().as_millis();
+    println!("heuristic search done after {}ms", heuristic_time);
+
     result.iter().for_each(|(c,_r,_)| {
-        println!("heuristic search done after {}ms", heuristic_time);
         println!("plan length: {}", c+1);
     });
 
     println!("------");
-    println!("speedup {:.2}x", classic_time as f32 / heuristic_time as f32);
+    let speedup = classic_time as f32 / heuristic_time as f32 - 1f32;
+    println!("speedup {:.2}x", speedup);
 
     Ok(())
 }

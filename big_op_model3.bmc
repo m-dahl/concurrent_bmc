@@ -1,0 +1,242 @@
+-- MODULE: op_model_cylinders2
+MODULE main
+
+VAR
+
+  cylinders2#shelf1 : {100,0,1,2,3};
+  cylinders2#shelf2 : {100,0,1,2,3};
+  cylinders2#shelf3 : {100,0,1,2,3};
+  cylinders2#conveyor : {100,0,1,2,3};
+  cylinders2#dorna_holding : {100,0,1,2,3};
+  cylinders2#dorna3_holding : {100,0,1,2,3};
+  cylinders2#conveyor2 : {100,0,1,2,3};
+  cylinders2#x : {left,right};
+
+
+IVAR
+
+  cylinders2#operations#take_shelf1_100#start : boolean;
+  cylinders2#operations#take_shelf1_0#start : boolean;
+  cylinders2#operations#take_shelf1_1#start : boolean;
+  cylinders2#operations#take_shelf1_2#start : boolean;
+  cylinders2#operations#take_shelf1_3#start : boolean;
+  cylinders2#operations#leave_shelf1_100#start : boolean;
+  cylinders2#operations#leave_shelf1_0#start : boolean;
+  cylinders2#operations#leave_shelf1_1#start : boolean;
+  cylinders2#operations#leave_shelf1_2#start : boolean;
+  cylinders2#operations#leave_shelf1_3#start : boolean;
+  cylinders2#operations#take_shelf2_100#start : boolean;
+  cylinders2#operations#take_shelf2_0#start : boolean;
+  cylinders2#operations#take_shelf2_1#start : boolean;
+  cylinders2#operations#take_shelf2_2#start : boolean;
+  cylinders2#operations#take_shelf2_3#start : boolean;
+  cylinders2#operations#leave_shelf2_100#start : boolean;
+  cylinders2#operations#leave_shelf2_0#start : boolean;
+  cylinders2#operations#leave_shelf2_1#start : boolean;
+  cylinders2#operations#leave_shelf2_2#start : boolean;
+  cylinders2#operations#leave_shelf2_3#start : boolean;
+  cylinders2#operations#take_shelf3_100#start : boolean;
+  cylinders2#operations#take_shelf3_0#start : boolean;
+  cylinders2#operations#take_shelf3_1#start : boolean;
+  cylinders2#operations#take_shelf3_2#start : boolean;
+  cylinders2#operations#take_shelf3_3#start : boolean;
+  cylinders2#operations#leave_shelf3_100#start : boolean;
+  cylinders2#operations#leave_shelf3_0#start : boolean;
+  cylinders2#operations#leave_shelf3_1#start : boolean;
+  cylinders2#operations#leave_shelf3_2#start : boolean;
+  cylinders2#operations#leave_shelf3_3#start : boolean;
+  cylinders2#operations#take_conveyor_100#start : boolean;
+  cylinders2#operations#take_conveyor_0#start : boolean;
+  cylinders2#operations#take_conveyor_1#start : boolean;
+  cylinders2#operations#take_conveyor_2#start : boolean;
+  cylinders2#operations#take_conveyor_3#start : boolean;
+  cylinders2#operations#leave_conveyor_100#start : boolean;
+  cylinders2#operations#leave_conveyor_0#start : boolean;
+  cylinders2#operations#leave_conveyor_1#start : boolean;
+  cylinders2#operations#leave_conveyor_2#start : boolean;
+  cylinders2#operations#leave_conveyor_3#start : boolean;
+  cylinders2#operations#r3_take_conveyor1_100#start : boolean;
+  cylinders2#operations#r3_take_conveyor1_0#start : boolean;
+  cylinders2#operations#r3_take_conveyor1_1#start : boolean;
+  cylinders2#operations#r3_take_conveyor1_2#start : boolean;
+  cylinders2#operations#r3_take_conveyor1_3#start : boolean;
+  cylinders2#operations#r3_leave_conveyor1_100#start : boolean;
+  cylinders2#operations#r3_leave_conveyor1_0#start : boolean;
+  cylinders2#operations#r3_leave_conveyor1_1#start : boolean;
+  cylinders2#operations#r3_leave_conveyor1_2#start : boolean;
+  cylinders2#operations#r3_leave_conveyor1_3#start : boolean;
+  cylinders2#operations#r3_take_conveyor2_100#start : boolean;
+  cylinders2#operations#r3_take_conveyor2_0#start : boolean;
+  cylinders2#operations#r3_take_conveyor2_1#start : boolean;
+  cylinders2#operations#r3_take_conveyor2_2#start : boolean;
+  cylinders2#operations#r3_take_conveyor2_3#start : boolean;
+  cylinders2#operations#r3_leave_conveyor2_100#start : boolean;
+  cylinders2#operations#r3_leave_conveyor2_0#start : boolean;
+  cylinders2#operations#r3_leave_conveyor2_1#start : boolean;
+  cylinders2#operations#r3_leave_conveyor2_2#start : boolean;
+  cylinders2#operations#r3_leave_conveyor2_3#start : boolean;
+  cylinders2#operations#r4_x_left#start : boolean;
+  cylinders2#operations#r4_x_right#start : boolean;
+  cylinders2#operations#take_scan_result1#start : boolean;
+  cylinders2#operations#take_scan_result2#start : boolean;
+  cylinders2#operations#take_scan_result3#start : boolean;
+  cylinders2#operations#consume_known_product#start : boolean;
+
+
+DEFINE
+
+
+
+TRANS
+
+cylinders2#operations#take_shelf1_100#start & ( ( ( ( cylinders2#shelf1 != 0 )&( cylinders2#dorna_holding = 0 ) )&( cylinders2#shelf1 = 100 ) ) ) & next(cylinders2#shelf1) = 0 & next(cylinders2#dorna_holding) = 100 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#take_shelf1_0#start & ( ( ( ( cylinders2#shelf1 != 0 )&( cylinders2#dorna_holding = 0 ) )&( cylinders2#shelf1 = 0 ) ) ) & next(cylinders2#shelf1) = 0 & next(cylinders2#dorna_holding) = 0 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#take_shelf1_1#start & ( ( ( ( cylinders2#shelf1 != 0 )&( cylinders2#dorna_holding = 0 ) )&( cylinders2#shelf1 = 1 ) ) ) & next(cylinders2#shelf1) = 0 & next(cylinders2#dorna_holding) = 1 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#take_shelf1_2#start & ( ( ( ( cylinders2#shelf1 != 0 )&( cylinders2#dorna_holding = 0 ) )&( cylinders2#shelf1 = 2 ) ) ) & next(cylinders2#shelf1) = 0 & next(cylinders2#dorna_holding) = 2 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#take_shelf1_3#start & ( ( ( ( cylinders2#shelf1 != 0 )&( cylinders2#dorna_holding = 0 ) )&( cylinders2#shelf1 = 3 ) ) ) & next(cylinders2#shelf1) = 0 & next(cylinders2#dorna_holding) = 3 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#leave_shelf1_100#start & ( ( ( ( cylinders2#dorna_holding != 0 )&( cylinders2#shelf1 = 0 ) )&( cylinders2#dorna_holding = 100 ) ) ) & next(cylinders2#dorna_holding) = 0 & next(cylinders2#shelf1) = 100 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#leave_shelf1_0#start & ( ( ( ( cylinders2#dorna_holding != 0 )&( cylinders2#shelf1 = 0 ) )&( cylinders2#dorna_holding = 0 ) ) ) & next(cylinders2#dorna_holding) = 0 & next(cylinders2#shelf1) = 0 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#leave_shelf1_1#start & ( ( ( ( cylinders2#dorna_holding != 0 )&( cylinders2#shelf1 = 0 ) )&( cylinders2#dorna_holding = 1 ) ) ) & next(cylinders2#dorna_holding) = 0 & next(cylinders2#shelf1) = 1 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#leave_shelf1_2#start & ( ( ( ( cylinders2#dorna_holding != 0 )&( cylinders2#shelf1 = 0 ) )&( cylinders2#dorna_holding = 2 ) ) ) & next(cylinders2#dorna_holding) = 0 & next(cylinders2#shelf1) = 2 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#leave_shelf1_3#start & ( ( ( ( cylinders2#dorna_holding != 0 )&( cylinders2#shelf1 = 0 ) )&( cylinders2#dorna_holding = 3 ) ) ) & next(cylinders2#dorna_holding) = 0 & next(cylinders2#shelf1) = 3 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#take_shelf2_100#start & ( ( ( ( cylinders2#shelf2 != 0 )&( cylinders2#dorna_holding = 0 ) )&( cylinders2#shelf2 = 100 ) ) ) & next(cylinders2#shelf2) = 0 & next(cylinders2#dorna_holding) = 100 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#take_shelf2_0#start & ( ( ( ( cylinders2#shelf2 != 0 )&( cylinders2#dorna_holding = 0 ) )&( cylinders2#shelf2 = 0 ) ) ) & next(cylinders2#shelf2) = 0 & next(cylinders2#dorna_holding) = 0 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#take_shelf2_1#start & ( ( ( ( cylinders2#shelf2 != 0 )&( cylinders2#dorna_holding = 0 ) )&( cylinders2#shelf2 = 1 ) ) ) & next(cylinders2#shelf2) = 0 & next(cylinders2#dorna_holding) = 1 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#take_shelf2_2#start & ( ( ( ( cylinders2#shelf2 != 0 )&( cylinders2#dorna_holding = 0 ) )&( cylinders2#shelf2 = 2 ) ) ) & next(cylinders2#shelf2) = 0 & next(cylinders2#dorna_holding) = 2 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#take_shelf2_3#start & ( ( ( ( cylinders2#shelf2 != 0 )&( cylinders2#dorna_holding = 0 ) )&( cylinders2#shelf2 = 3 ) ) ) & next(cylinders2#shelf2) = 0 & next(cylinders2#dorna_holding) = 3 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#leave_shelf2_100#start & ( ( ( ( cylinders2#dorna_holding != 0 )&( cylinders2#shelf2 = 0 ) )&( cylinders2#dorna_holding = 100 ) ) ) & next(cylinders2#dorna_holding) = 0 & next(cylinders2#shelf2) = 100 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#leave_shelf2_0#start & ( ( ( ( cylinders2#dorna_holding != 0 )&( cylinders2#shelf2 = 0 ) )&( cylinders2#dorna_holding = 0 ) ) ) & next(cylinders2#dorna_holding) = 0 & next(cylinders2#shelf2) = 0 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#leave_shelf2_1#start & ( ( ( ( cylinders2#dorna_holding != 0 )&( cylinders2#shelf2 = 0 ) )&( cylinders2#dorna_holding = 1 ) ) ) & next(cylinders2#dorna_holding) = 0 & next(cylinders2#shelf2) = 1 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#leave_shelf2_2#start & ( ( ( ( cylinders2#dorna_holding != 0 )&( cylinders2#shelf2 = 0 ) )&( cylinders2#dorna_holding = 2 ) ) ) & next(cylinders2#dorna_holding) = 0 & next(cylinders2#shelf2) = 2 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#leave_shelf2_3#start & ( ( ( ( cylinders2#dorna_holding != 0 )&( cylinders2#shelf2 = 0 ) )&( cylinders2#dorna_holding = 3 ) ) ) & next(cylinders2#dorna_holding) = 0 & next(cylinders2#shelf2) = 3 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#take_shelf3_100#start & ( ( ( ( cylinders2#shelf3 != 0 )&( cylinders2#dorna_holding = 0 ) )&( cylinders2#shelf3 = 100 ) ) ) & next(cylinders2#shelf3) = 0 & next(cylinders2#dorna_holding) = 100 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#take_shelf3_0#start & ( ( ( ( cylinders2#shelf3 != 0 )&( cylinders2#dorna_holding = 0 ) )&( cylinders2#shelf3 = 0 ) ) ) & next(cylinders2#shelf3) = 0 & next(cylinders2#dorna_holding) = 0 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#take_shelf3_1#start & ( ( ( ( cylinders2#shelf3 != 0 )&( cylinders2#dorna_holding = 0 ) )&( cylinders2#shelf3 = 1 ) ) ) & next(cylinders2#shelf3) = 0 & next(cylinders2#dorna_holding) = 1 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#take_shelf3_2#start & ( ( ( ( cylinders2#shelf3 != 0 )&( cylinders2#dorna_holding = 0 ) )&( cylinders2#shelf3 = 2 ) ) ) & next(cylinders2#shelf3) = 0 & next(cylinders2#dorna_holding) = 2 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#take_shelf3_3#start & ( ( ( ( cylinders2#shelf3 != 0 )&( cylinders2#dorna_holding = 0 ) )&( cylinders2#shelf3 = 3 ) ) ) & next(cylinders2#shelf3) = 0 & next(cylinders2#dorna_holding) = 3 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#leave_shelf3_100#start & ( ( ( ( cylinders2#dorna_holding != 0 )&( cylinders2#shelf3 = 0 ) )&( cylinders2#dorna_holding = 100 ) ) ) & next(cylinders2#dorna_holding) = 0 & next(cylinders2#shelf3) = 100 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#leave_shelf3_0#start & ( ( ( ( cylinders2#dorna_holding != 0 )&( cylinders2#shelf3 = 0 ) )&( cylinders2#dorna_holding = 0 ) ) ) & next(cylinders2#dorna_holding) = 0 & next(cylinders2#shelf3) = 0 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#leave_shelf3_1#start & ( ( ( ( cylinders2#dorna_holding != 0 )&( cylinders2#shelf3 = 0 ) )&( cylinders2#dorna_holding = 1 ) ) ) & next(cylinders2#dorna_holding) = 0 & next(cylinders2#shelf3) = 1 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#leave_shelf3_2#start & ( ( ( ( cylinders2#dorna_holding != 0 )&( cylinders2#shelf3 = 0 ) )&( cylinders2#dorna_holding = 2 ) ) ) & next(cylinders2#dorna_holding) = 0 & next(cylinders2#shelf3) = 2 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#leave_shelf3_3#start & ( ( ( ( cylinders2#dorna_holding != 0 )&( cylinders2#shelf3 = 0 ) )&( cylinders2#dorna_holding = 3 ) ) ) & next(cylinders2#dorna_holding) = 0 & next(cylinders2#shelf3) = 3 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#take_conveyor_100#start & ( ( ( ( cylinders2#conveyor != 0 )&( cylinders2#dorna_holding = 0 ) )&( cylinders2#conveyor = 100 ) ) ) & next(cylinders2#conveyor) = 0 & next(cylinders2#dorna_holding) = 100 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#take_conveyor_0#start & ( ( ( ( cylinders2#conveyor != 0 )&( cylinders2#dorna_holding = 0 ) )&( cylinders2#conveyor = 0 ) ) ) & next(cylinders2#conveyor) = 0 & next(cylinders2#dorna_holding) = 0 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#take_conveyor_1#start & ( ( ( ( cylinders2#conveyor != 0 )&( cylinders2#dorna_holding = 0 ) )&( cylinders2#conveyor = 1 ) ) ) & next(cylinders2#conveyor) = 0 & next(cylinders2#dorna_holding) = 1 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#take_conveyor_2#start & ( ( ( ( cylinders2#conveyor != 0 )&( cylinders2#dorna_holding = 0 ) )&( cylinders2#conveyor = 2 ) ) ) & next(cylinders2#conveyor) = 0 & next(cylinders2#dorna_holding) = 2 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#take_conveyor_3#start & ( ( ( ( cylinders2#conveyor != 0 )&( cylinders2#dorna_holding = 0 ) )&( cylinders2#conveyor = 3 ) ) ) & next(cylinders2#conveyor) = 0 & next(cylinders2#dorna_holding) = 3 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#leave_conveyor_100#start & ( ( ( ( cylinders2#dorna_holding != 0 )&( cylinders2#conveyor = 0 ) )&( cylinders2#dorna_holding = 100 ) ) ) & next(cylinders2#dorna_holding) = 0 & next(cylinders2#conveyor) = 100 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#leave_conveyor_0#start & ( ( ( ( cylinders2#dorna_holding != 0 )&( cylinders2#conveyor = 0 ) )&( cylinders2#dorna_holding = 0 ) ) ) & next(cylinders2#dorna_holding) = 0 & next(cylinders2#conveyor) = 0 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#leave_conveyor_1#start & ( ( ( ( cylinders2#dorna_holding != 0 )&( cylinders2#conveyor = 0 ) )&( cylinders2#dorna_holding = 1 ) ) ) & next(cylinders2#dorna_holding) = 0 & next(cylinders2#conveyor) = 1 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#leave_conveyor_2#start & ( ( ( ( cylinders2#dorna_holding != 0 )&( cylinders2#conveyor = 0 ) )&( cylinders2#dorna_holding = 2 ) ) ) & next(cylinders2#dorna_holding) = 0 & next(cylinders2#conveyor) = 2 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#leave_conveyor_3#start & ( ( ( ( cylinders2#dorna_holding != 0 )&( cylinders2#conveyor = 0 ) )&( cylinders2#dorna_holding = 3 ) ) ) & next(cylinders2#dorna_holding) = 0 & next(cylinders2#conveyor) = 3 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#r3_take_conveyor1_100#start & ( ( ( ( cylinders2#conveyor != 0 )&( cylinders2#dorna3_holding = 0 ) )&( cylinders2#conveyor = 100 ) ) ) & next(cylinders2#conveyor) = 0 & next(cylinders2#dorna3_holding) = 100 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna_holding) = cylinders2#dorna_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#r3_take_conveyor1_0#start & ( ( ( ( cylinders2#conveyor != 0 )&( cylinders2#dorna3_holding = 0 ) )&( cylinders2#conveyor = 0 ) ) ) & next(cylinders2#conveyor) = 0 & next(cylinders2#dorna3_holding) = 0 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna_holding) = cylinders2#dorna_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#r3_take_conveyor1_1#start & ( ( ( ( cylinders2#conveyor != 0 )&( cylinders2#dorna3_holding = 0 ) )&( cylinders2#conveyor = 1 ) ) ) & next(cylinders2#conveyor) = 0 & next(cylinders2#dorna3_holding) = 1 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna_holding) = cylinders2#dorna_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#r3_take_conveyor1_2#start & ( ( ( ( cylinders2#conveyor != 0 )&( cylinders2#dorna3_holding = 0 ) )&( cylinders2#conveyor = 2 ) ) ) & next(cylinders2#conveyor) = 0 & next(cylinders2#dorna3_holding) = 2 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna_holding) = cylinders2#dorna_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#r3_take_conveyor1_3#start & ( ( ( ( cylinders2#conveyor != 0 )&( cylinders2#dorna3_holding = 0 ) )&( cylinders2#conveyor = 3 ) ) ) & next(cylinders2#conveyor) = 0 & next(cylinders2#dorna3_holding) = 3 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna_holding) = cylinders2#dorna_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#r3_leave_conveyor1_100#start & ( ( ( ( cylinders2#conveyor = 0 )&( cylinders2#dorna3_holding != 0 ) )&( cylinders2#dorna3_holding = 100 ) ) ) & next(cylinders2#dorna3_holding) = 0 & next(cylinders2#conveyor) = 100 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna_holding) = cylinders2#dorna_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#r3_leave_conveyor1_0#start & ( ( ( ( cylinders2#conveyor = 0 )&( cylinders2#dorna3_holding != 0 ) )&( cylinders2#dorna3_holding = 0 ) ) ) & next(cylinders2#dorna3_holding) = 0 & next(cylinders2#conveyor) = 0 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna_holding) = cylinders2#dorna_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#r3_leave_conveyor1_1#start & ( ( ( ( cylinders2#conveyor = 0 )&( cylinders2#dorna3_holding != 0 ) )&( cylinders2#dorna3_holding = 1 ) ) ) & next(cylinders2#dorna3_holding) = 0 & next(cylinders2#conveyor) = 1 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna_holding) = cylinders2#dorna_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#r3_leave_conveyor1_2#start & ( ( ( ( cylinders2#conveyor = 0 )&( cylinders2#dorna3_holding != 0 ) )&( cylinders2#dorna3_holding = 2 ) ) ) & next(cylinders2#dorna3_holding) = 0 & next(cylinders2#conveyor) = 2 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna_holding) = cylinders2#dorna_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#r3_leave_conveyor1_3#start & ( ( ( ( cylinders2#conveyor = 0 )&( cylinders2#dorna3_holding != 0 ) )&( cylinders2#dorna3_holding = 3 ) ) ) & next(cylinders2#dorna3_holding) = 0 & next(cylinders2#conveyor) = 3 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna_holding) = cylinders2#dorna_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#r3_take_conveyor2_100#start & ( ( ( ( cylinders2#conveyor2 != 0 )&( cylinders2#dorna3_holding = 0 ) )&( cylinders2#conveyor2 = 100 ) ) ) & next(cylinders2#conveyor2) = 0 & next(cylinders2#dorna3_holding) = 100 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna_holding) = cylinders2#dorna_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) |
+
+cylinders2#operations#r3_take_conveyor2_0#start & ( ( ( ( cylinders2#conveyor2 != 0 )&( cylinders2#dorna3_holding = 0 ) )&( cylinders2#conveyor2 = 0 ) ) ) & next(cylinders2#conveyor2) = 0 & next(cylinders2#dorna3_holding) = 0 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna_holding) = cylinders2#dorna_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) |
+
+cylinders2#operations#r3_take_conveyor2_1#start & ( ( ( ( cylinders2#conveyor2 != 0 )&( cylinders2#dorna3_holding = 0 ) )&( cylinders2#conveyor2 = 1 ) ) ) & next(cylinders2#conveyor2) = 0 & next(cylinders2#dorna3_holding) = 1 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna_holding) = cylinders2#dorna_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) |
+
+cylinders2#operations#r3_take_conveyor2_2#start & ( ( ( ( cylinders2#conveyor2 != 0 )&( cylinders2#dorna3_holding = 0 ) )&( cylinders2#conveyor2 = 2 ) ) ) & next(cylinders2#conveyor2) = 0 & next(cylinders2#dorna3_holding) = 2 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna_holding) = cylinders2#dorna_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) |
+
+cylinders2#operations#r3_take_conveyor2_3#start & ( ( ( ( cylinders2#conveyor2 != 0 )&( cylinders2#dorna3_holding = 0 ) )&( cylinders2#conveyor2 = 3 ) ) ) & next(cylinders2#conveyor2) = 0 & next(cylinders2#dorna3_holding) = 3 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna_holding) = cylinders2#dorna_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) |
+
+cylinders2#operations#r3_leave_conveyor2_100#start & ( ( ( ( cylinders2#conveyor2 = 0 )&( cylinders2#dorna3_holding != 0 ) )&( cylinders2#dorna3_holding = 100 ) ) ) & next(cylinders2#dorna3_holding) = 0 & next(cylinders2#conveyor2) = 100 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna_holding) = cylinders2#dorna_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) |
+
+cylinders2#operations#r3_leave_conveyor2_0#start & ( ( ( ( cylinders2#conveyor2 = 0 )&( cylinders2#dorna3_holding != 0 ) )&( cylinders2#dorna3_holding = 0 ) ) ) & next(cylinders2#dorna3_holding) = 0 & next(cylinders2#conveyor2) = 0 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna_holding) = cylinders2#dorna_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) |
+
+cylinders2#operations#r3_leave_conveyor2_1#start & ( ( ( ( cylinders2#conveyor2 = 0 )&( cylinders2#dorna3_holding != 0 ) )&( cylinders2#dorna3_holding = 1 ) ) ) & next(cylinders2#dorna3_holding) = 0 & next(cylinders2#conveyor2) = 1 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna_holding) = cylinders2#dorna_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) |
+
+cylinders2#operations#r3_leave_conveyor2_2#start & ( ( ( ( cylinders2#conveyor2 = 0 )&( cylinders2#dorna3_holding != 0 ) )&( cylinders2#dorna3_holding = 2 ) ) ) & next(cylinders2#dorna3_holding) = 0 & next(cylinders2#conveyor2) = 2 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna_holding) = cylinders2#dorna_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) |
+
+cylinders2#operations#r3_leave_conveyor2_3#start & ( ( ( ( cylinders2#conveyor2 = 0 )&( cylinders2#dorna3_holding != 0 ) )&( cylinders2#dorna3_holding = 3 ) ) ) & next(cylinders2#dorna3_holding) = 0 & next(cylinders2#conveyor2) = 3 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna_holding) = cylinders2#dorna_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) |
+
+cylinders2#operations#r4_x_left#start & ( ( cylinders2#x = right ) ) & next(cylinders2#x) = left & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna_holding) = cylinders2#dorna_holding ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#r4_x_right#start & ( ( cylinders2#x = left ) ) & next(cylinders2#x) = right & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna_holding) = cylinders2#dorna_holding ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#take_scan_result1#start & ( ( cylinders2#dorna_holding = 100 ) ) & next(cylinders2#dorna_holding) = 1 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#take_scan_result2#start & ( ( cylinders2#dorna_holding = 100 ) ) & next(cylinders2#dorna_holding) = 2 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#take_scan_result3#start & ( ( cylinders2#dorna_holding = 100 ) ) & next(cylinders2#dorna_holding) = 3 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 ) & ( next(cylinders2#conveyor2) = cylinders2#conveyor2 ) |
+
+cylinders2#operations#consume_known_product#start & ( ( ( cylinders2#conveyor2 != 0 )&( cylinders2#conveyor2 != 100 ) ) ) & next(cylinders2#conveyor2) = 0 & ( next(cylinders2#x) = cylinders2#x ) & ( next(cylinders2#shelf3) = cylinders2#shelf3 ) & ( next(cylinders2#conveyor) = cylinders2#conveyor ) & ( next(cylinders2#shelf2) = cylinders2#shelf2 ) & ( next(cylinders2#dorna_holding) = cylinders2#dorna_holding ) & ( next(cylinders2#dorna3_holding) = cylinders2#dorna3_holding ) & ( next(cylinders2#shelf1) = cylinders2#shelf1 )
+
+INVAR
+
+TRUE
+;
+
+
+ASSIGN
+
+  init(cylinders2#shelf1) := 100;
+  init(cylinders2#shelf2) := 0;
+  init(cylinders2#shelf3) := 100;
+  init(cylinders2#conveyor) := 0;
+  init(cylinders2#dorna_holding) := 0;
+  init(cylinders2#dorna3_holding) := 100;
+  init(cylinders2#conveyor2) := 0;
+  init(cylinders2#x) := right;
+
+
+LTLSPEC ! ( F ( ( ( ( cylinders2#shelf1 != 1 )&( cylinders2#shelf2 != 1 )&( cylinders2#shelf3 != 1 )&( cylinders2#dorna_holding != 1 )&( cylinders2#dorna3_holding != 1 )&( cylinders2#conveyor != 1 )&( cylinders2#conveyor2 != 1 ) )&( ( cylinders2#shelf1 != 2 )&( cylinders2#shelf2 != 2 )&( cylinders2#shelf3 != 2 )&( cylinders2#dorna_holding != 2 )&( cylinders2#dorna3_holding != 2 )&( cylinders2#conveyor != 2 )&( cylinders2#conveyor2 != 2 ) )&( ( cylinders2#shelf1 != 3 )&( cylinders2#shelf2 != 3 )&( cylinders2#shelf3 != 3 )&( cylinders2#dorna_holding != 3 )&( cylinders2#dorna3_holding != 3 )&( cylinders2#conveyor != 3 )&( cylinders2#conveyor2 != 3 ) )&( ( cylinders2#shelf1 != 100 )&( cylinders2#shelf2 != 100 )&( cylinders2#shelf3 != 100 )&( cylinders2#dorna_holding != 100 )&( cylinders2#dorna3_holding != 100 )&( cylinders2#conveyor != 100 )&( cylinders2#conveyor2 != 100 ) ) ) )&F ( ( cylinders2#x = left ) ) );
